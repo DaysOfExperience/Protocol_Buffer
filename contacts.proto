@@ -1,0 +1,22 @@
+syntax = "proto3";   // 必须第一行，表示使用proto3语法版本
+package contacts;   // 类似于命名空间，可选    (在项目中要有唯一性？)
+
+// 定义联系人消息
+message PeopleInfo {
+    string name = 1;    // 字段类型 字段名 = 字段唯⼀编号
+    int32 age = 2;  // 这个并不是默认值，它是字段唯一编号
+
+    message Phone {
+        string number = 1;
+    }
+    // 但如果是消息类型的字段，其设置⽅法为 mutable_ ⽅法，返回值为消息类型的指针，这类⽅法会为我们开辟
+    // 好空间，可以直接对这块空间的内容进⾏修改。
+    repeated Phone phone = 3;
+}
+
+message Contacts {
+    repeated PeopleInfo contacts = 1;
+}
+
+// 对于singular规则修饰的字段，set，get，clear
+// 对于repeated规则修饰的字段，也就是一个数组
