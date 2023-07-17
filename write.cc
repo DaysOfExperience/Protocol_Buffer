@@ -23,6 +23,22 @@ void AddPeopleInfo(contacts::PeopleInfo *ptr)
         if(number.empty()) break;
         contacts::PeopleInfo_Phone* phone = ptr->add_phone();
         phone->set_number(number);
+
+        std::cout << "请选择此联系方式的类型(1. 移动电话 2. 固定电话) : ";
+        int type;
+        cin >> type;
+        cin.ignore(256, '\n');
+        switch(type) {
+            case 1:
+                phone->set_type(contacts::PeopleInfo_Phone_PhoneType_MP);
+                break;
+            case 2:
+                phone->set_type(contacts::PeopleInfo_Phone_PhoneType_TEL);
+                break;
+            default:
+                std::cout << "输入的联系方式类型有误，使用默认值" << std::endl;
+                break;
+        }
     }
 }
 

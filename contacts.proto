@@ -7,7 +7,12 @@ message PeopleInfo {
     int32 age = 2;  // 这个并不是默认值，它是字段唯一编号
 
     message Phone {
-        string number = 1;
+        string number = 1;  // 电话号
+        enum PhoneType {   // 生成的.h.cc文件中会有对应的C++的enum出现: PeopleInfo_Phone_PhoneType
+            MP = 0;   // 移动电话   0值常量必须存在，且要作为第⼀个元素。第⼀个元素作为默认值，且值为 0。
+            TEL = 1;  // 固定电话
+        }
+        PhoneType type = 2;  // 电话类型，对应的get set clear都会有
     }
     // 但如果是消息类型的字段，其设置⽅法为 mutable_ ⽅法，返回值为消息类型的指针，这类⽅法会为我们开辟
     // 好空间，可以直接对这块空间的内容进⾏修改。

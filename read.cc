@@ -10,7 +10,9 @@ void PrintContacts(const contacts::Contacts &contacts)
         std::cout << "name: " << people.name()
                 << " age: " << people.age() << std::endl;
         for(int j = 0; j < people.phone_size(); ++j) {
-            std::cout << "phone" << j+1 << ": " << people.phone(j).number() << std::endl;
+            contacts::PeopleInfo_Phone phone = people.phone(j);
+            std::cout << "phone" << j+1 << ": " << phone.number()
+                << "(" << phone.PhoneType_Name(phone.type()) << ")" << std::endl;
         }
     }
 }
